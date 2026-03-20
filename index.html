@@ -12,20 +12,126 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
 
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --accent-orange: #ff4d00;
-            --accent-red: #ff1744;
-            --text-primary: #ffffff;
-            --text-secondary: #e5e5e5;
-            --text-muted: #9ca3af;
+            color-scheme: light dark;
+
+            /* Backgrounds — warm cream/parchment, hue 40 */
+            --background: oklch(0.96 0.01 40);
+            --foreground: oklch(0.15 0.01 25);
+            --card: oklch(0.98 0.008 40);
+            --card-foreground: oklch(0.15 0.01 25);
+
+            /* Primary — Orange */
+            --primary: oklch(0.65 0.22 45);
+            --primary-foreground: oklch(0.99 0.005 40);
+
+            /* Muted */
+            --muted: oklch(0.92 0.01 40);
+            --muted-foreground: oklch(0.45 0.02 25);
+
+            /* Borders & inputs */
+            --border: oklch(0 0 0 / 10%);
+            --ring: oklch(0.65 0.22 45);
+
+            /* Glass */
+            --glass: oklch(1 0 0 / 60%);
+            --glass-border: oklch(0 0 0 / 8%);
+
+            /* Surface Variants */
+            --surface-0: oklch(0.95 0.01 40);
+            --surface-1: oklch(0.97 0.008 40);
+            --surface-2: oklch(0.98 0.006 40);
+            --surface-3: oklch(0.99 0.004 40);
+
+            /* Gradient Tokens */
+            --text-gradient-primary: linear-gradient(135deg, oklch(0.65 0.22 50), oklch(0.50 0.24 25));
+
+            /* Background Component Tokens */
+            --bg-radial-center: oklch(0.94 0.02 40 / 50%);
+            --bg-radial-edge: oklch(0.96 0.01 40);
+            --bg-grid-line: oklch(0.55 0.18 45);
+            --bg-vignette: oklch(0.80 0.02 40 / 20%);
+            --bg-grid-opacity: 0.10;
+            --bg-cursor-opacity: 0.20;
+
+            /* Sketch Tokens */
+            --sketch-stroke: oklch(0.55 0.18 45);
+            --sketch-opacity: 0.06;
+
+            /* Keyframe Color Tokens */
+            --glow-color: oklch(0.65 0.22 45);
+            --shine-color: oklch(1 0 0 / 14%);
+
+            /* Shadow System */
+            --glow-primary-sm: 0 0 8px 0 oklch(0.65 0.22 45 / 35%);
+            --glow-primary: 0 0 16px 2px oklch(0.65 0.22 45 / 20%), 0 0 4px 0 oklch(0.65 0.22 45 / 35%);
+            --elevation-1: 0 1px 3px oklch(0 0 0 / 8%), 0 0 0 1px oklch(0 0 0 / 5%);
+            --elevation-2: 0 4px 12px oklch(0 0 0 / 10%), 0 0 0 1px oklch(0 0 0 / 6%);
+            --elevation-3: 0 8px 24px oklch(0 0 0 / 14%), 0 0 0 1px oklch(0 0 0 / 8%);
+            --ambient-primary: 0 0 30px oklch(0.65 0.22 45 / 15%);
+        }
+
+        .dark {
+            /* Backgrounds — warm neutral hue 25 */
+            --background: oklch(0.13 0.01 25);
+            --foreground: oklch(0.93 0.01 25);
+            --card: oklch(0.17 0.015 25);
+            --card-foreground: oklch(0.93 0.01 25);
+
+            /* Primary — Orange (lightened for AA contrast) */
+            --primary: oklch(0.72 0.20 45);
+            --primary-foreground: oklch(0.10 0.01 25);
+
+            /* Muted */
+            --muted: oklch(0.22 0.015 25);
+            --muted-foreground: oklch(0.55 0.02 25);
+
+            /* Borders & inputs */
+            --border: oklch(1 0 0 / 8%);
+            --ring: oklch(0.72 0.20 45);
+
+            /* Glass */
+            --glass: oklch(1 0 0 / 5%);
+            --glass-border: oklch(1 0 0 / 10%);
+
+            /* Surface Variants */
+            --surface-0: oklch(0.10 0.01 25);
+            --surface-1: oklch(0.14 0.012 25);
+            --surface-2: oklch(0.18 0.015 25);
+            --surface-3: oklch(0.22 0.018 25);
+
+            /* Gradient Tokens */
+            --text-gradient-primary: linear-gradient(135deg, oklch(0.80 0.18 50), oklch(0.65 0.24 25));
+
+            /* Background Component Tokens */
+            --bg-radial-center: oklch(0.18 0.02 35 / 50%);
+            --bg-radial-edge: oklch(0.13 0.01 25);
+            --bg-grid-line: oklch(0.72 0.20 45);
+            --bg-vignette: oklch(0.05 0.01 25 / 40%);
+            --bg-grid-opacity: 0.12;
+            --bg-cursor-opacity: 0.25;
+
+            /* Sketch Tokens */
+            --sketch-stroke: oklch(0.72 0.20 45);
+            --sketch-opacity: 0.08;
+
+            /* Keyframe Color Tokens */
+            --glow-color: oklch(0.72 0.20 45);
+            --shine-color: oklch(1 0 0 / 14%);
+
+            /* Shadow System */
+            --glow-primary-sm: 0 0 8px 0 oklch(0.72 0.20 45 / 30%);
+            --glow-primary: 0 0 16px 2px oklch(0.72 0.20 45 / 25%), 0 0 4px 0 oklch(0.72 0.20 45 / 40%);
+            --elevation-1: 0 1px 3px oklch(0 0 0 / 40%), 0 0 0 1px oklch(1 0 0 / 5%);
+            --elevation-2: 0 4px 12px oklch(0 0 0 / 50%), 0 0 0 1px oklch(1 0 0 / 8%);
+            --elevation-3: 0 8px 24px oklch(0 0 0 / 60%), 0 0 0 1px oklch(1 0 0 / 10%);
+            --ambient-primary: 0 0 40px oklch(0.72 0.20 45 / 20%);
         }
 
         * {
@@ -33,53 +139,64 @@
         }
 
         h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'DM Sans', sans-serif;
+        }
+        .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
+            background-color: var(--background);
+            color: var(--foreground);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated Grid Background */
-        .grid-background {
+        /* Dot Grid Background */
+        .dot-grid-bg {
             position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .dot-grid-bg > div {
+            position: absolute;
+            inset: 0;
+        }
+
+        /* Grid lines */
+        .grid-line-v {
+            position: absolute;
             top: 0;
+            height: 100%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, var(--bg-grid-line), transparent);
+        }
+
+        .grid-line-h {
+            position: absolute;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.15;
-        }
-
-        .grid-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
-        }
-
-        .grid-line-vertical {
-            width: 1px;
-            height: 100%;
-            animation: pulseVertical 4s ease-in-out infinite;
-        }
-
-        .grid-line-horizontal {
             height: 1px;
-            width: 100%;
-            animation: pulseHorizontal 4s ease-in-out infinite;
+            background: linear-gradient(90deg, transparent, var(--bg-grid-line), transparent);
         }
 
-        @keyframes pulseVertical {
-            0%, 100% { opacity: 0.3; transform: translateY(0); }
-            50% { opacity: 0.6; transform: translateY(20px); }
+        /* Grid pulse animations */
+        @keyframes grid-pulse-v {
+            0%, 100% { opacity: 0.25; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(12px); }
         }
 
-        @keyframes pulseHorizontal {
-            0%, 100% { opacity: 0.3; transform: translateX(0); }
-            50% { opacity: 0.6; transform: translateX(20px); }
+        @keyframes grid-pulse-h {
+            0%, 100% { opacity: 0.25; transform: translateX(0); }
+            50% { opacity: 0.5; transform: translateX(12px); }
+        }
+
+        /* Cursor glow overlay */
+        .cursor-glow {
+            transition: opacity 0.3s ease;
+            opacity: 0;
         }
 
         /* Background sketch decorations - Parallax */
@@ -96,44 +213,63 @@
 
         .sketch-item {
             position: absolute;
-            stroke: var(--accent-orange);
+            stroke: var(--sketch-stroke);
             fill: none;
             stroke-width: 1.5;
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 0.08;
+            opacity: var(--sketch-opacity);
             will-change: transform;
             transition: transform 0.1s ease-out;
         }
 
         /* Gradient text effect */
         .gradient-text {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+            background: var(--text-gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        /* Glass morphism panel */
+        .glass-panel {
+            background-color: oklch(from var(--card) l c h / 88%);
+            backdrop-filter: blur(8px) saturate(1.3);
+            -webkit-backdrop-filter: blur(8px) saturate(1.3);
+        }
+
         /* Card hover effects */
         .service-card, .team-card {
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 77, 0, 0.1);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--elevation-1);
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 77, 0, 0.4);
-            box-shadow: 0 20px 40px rgba(255, 77, 0, 0.15);
+            transform: translateY(-2px);
+            border-color: oklch(from var(--primary) l c h / 40%);
+            box-shadow: var(--elevation-2);
         }
 
         .team-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 77, 0, 0.3);
+            transform: translateY(-2px);
+            border-color: oklch(from var(--primary) l c h / 30%);
+            box-shadow: var(--elevation-2);
+        }
+
+        /* Nav link styles */
+        .nav-link {
+            color: var(--muted-foreground);
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: var(--foreground);
         }
 
         /* Button styles */
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, oklch(from var(--primary) l c h / 85%) 100%);
+            box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 15%);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -141,7 +277,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.4);
+            box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 15%), var(--glow-primary);
         }
 
         .btn-primary::before {
@@ -151,7 +287,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, var(--shine-color), transparent);
             transition: left 0.5s ease;
         }
 
@@ -161,21 +297,23 @@
 
         /* Form styles */
         input, textarea {
-            background-color: var(--bg-secondary);
-            border: 1px solid rgba(255, 77, 0, 0.2);
-            color: var(--text-primary);
+            background-color: var(--glass);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid var(--glass-border);
+            color: var(--foreground);
             transition: all 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.1);
+            border-color: oklch(from var(--primary) l c h / 50%);
+            box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 20%);
             transform: translateY(-2px);
         }
 
         input::placeholder, textarea::placeholder {
-            color: var(--text-muted);
+            color: oklch(from var(--muted-foreground) l c h / 70%);
         }
 
         /* Toast notification */
@@ -183,15 +321,16 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--accent-orange);
+            background: var(--card);
+            border: 1px solid var(--primary);
             padding: 1rem 1.5rem;
             border-radius: 0.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--elevation-3);
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
             max-width: 300px;
+            color: var(--foreground);
         }
 
         .toast.show {
@@ -199,17 +338,17 @@
         }
 
         .toast.success {
-            border-color: #10b981;
+            border-color: oklch(0.70 0.17 160);
         }
 
         .toast.error {
-            border-color: #ef4444;
+            border-color: oklch(0.63 0.21 25);
         }
 
         /* Loading spinner */
         .spinner {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            border: 2px solid oklch(from var(--foreground) l c h / 30%);
+            border-top-color: var(--foreground);
             border-radius: 50%;
             width: 16px;
             height: 16px;
@@ -223,7 +362,7 @@
         /* Section divider */
         .section-divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 77, 0, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, oklch(from var(--primary) l c h / 30%), transparent);
             margin: 4rem 0;
         }
 
@@ -235,7 +374,7 @@
         /* Phoenix icon animation */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-3px); }
         }
 
         .phoenix-icon {
@@ -246,12 +385,12 @@
         /* Phoenix glow animation */
         @keyframes phoenixGlow {
             0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(255, 77, 0, 0.4))
-                        drop-shadow(0 0 20px rgba(255, 77, 0, 0.2));
+                filter: drop-shadow(0 0 6px oklch(from var(--glow-color) l c h / 35%))
+                        drop-shadow(0 0 14px oklch(from var(--glow-color) l c h / 15%));
             }
             50% {
-                filter: drop-shadow(0 0 20px rgba(255, 77, 0, 0.6))
-                        drop-shadow(0 0 40px rgba(255, 77, 0, 0.4));
+                filter: drop-shadow(0 0 12px oklch(from var(--glow-color) l c h / 55%))
+                        drop-shadow(0 0 28px oklch(from var(--glow-color) l c h / 30%));
             }
         }
 
@@ -286,13 +425,13 @@
                 opacity: 0;
             }
             10% {
-                opacity: 1;
+                opacity: 0.9;
             }
             90% {
-                opacity: 0.8;
+                opacity: 0.5;
             }
             100% {
-                transform: translateY(-60px) translateX(var(--drift)) scale(0);
+                transform: translateY(-22px) translateX(var(--drift)) scale(0);
                 opacity: 0;
             }
         }
@@ -304,7 +443,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, #ff4d00, #ff1744);
             pointer-events: none;
-            animation: fireParticle 2s ease-out infinite;
+            animation: fireParticle 2.1s ease-out infinite;
         }
 
         .fire-particle:nth-child(1) {
@@ -352,11 +491,67 @@
                 max-width: none;
             }
         }
+        #themeToggle {
+            color: var(--muted-foreground);
+        }
+        #themeToggle:hover {
+            color: var(--foreground);
+        }
+
+        /* Reduced motion: disable all custom animations */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Mobile: disable backdrop-blur for GPU performance */
+        @media (max-width: 640px) {
+            .glass-panel,
+            nav {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            .glass-panel {
+                background-color: var(--card) !important;
+            }
+
+            input, textarea {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--card) !important;
+            }
+        }
     </style>
+    <script>
+        // Prevent FOUC: set theme before render
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
 </head>
 <body>
-    <!-- Animated Grid Background -->
-    <div class="grid-background" id="gridBackground"></div>
+    <!-- Dot Grid Background -->
+    <div class="dot-grid-bg" aria-hidden="true">
+        <!-- Layer 1: Warm radial gradient -->
+        <div style="background: radial-gradient(ellipse at 50% 40%, var(--bg-radial-center) 0%, var(--bg-radial-edge) 70%);"></div>
+        <!-- Layer 2: Base grid (dim, always visible) -->
+        <div id="baseGrid" style="opacity: var(--bg-grid-opacity);"></div>
+        <!-- Layer 3: Cursor glow grid (bright, masked to cursor) -->
+        <div id="cursorGlow" class="cursor-glow" style="opacity: 0;"></div>
+        <!-- Layer 4: Noise grain texture -->
+        <div style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); background-repeat: repeat;"></div>
+        <!-- Layer 5: Vignette -->
+        <div style="background: radial-gradient(ellipse at center, transparent 50%, var(--bg-vignette) 100%);"></div>
+    </div>
 
     <!-- Background Sketch Decorations - Parallax -->
     <div class="sketch-decorations">
@@ -442,10 +637,10 @@
             <line x1="200" y1="52" x2="240" y2="100" stroke-width="2" stroke-dasharray="5,5"/>
             <line x1="200" y1="142" x2="240" y2="100" stroke-width="2" stroke-dasharray="5,5"/>
             <!-- Dots on nodes -->
-            <circle cx="60" cy="105" r="8" fill="var(--accent-orange)"/>
-            <circle cx="170" cy="52" r="8" fill="var(--accent-orange)"/>
-            <circle cx="170" cy="142" r="8" fill="var(--accent-orange)"/>
-            <circle cx="265" cy="100" r="8" fill="var(--accent-orange)"/>
+            <circle cx="60" cy="105" r="8" fill="var(--sketch-stroke)"/>
+            <circle cx="170" cy="52" r="8" fill="var(--sketch-stroke)"/>
+            <circle cx="170" cy="142" r="8" fill="var(--sketch-stroke)"/>
+            <circle cx="265" cy="100" r="8" fill="var(--sketch-stroke)"/>
         </svg>
 
         <!-- "The Minds Behind the Code" Section Sketches -->
@@ -514,7 +709,7 @@
             <rect x="40" y="115" width="170" height="20" rx="4"/>
             <rect x="40" y="145" width="170" height="60" rx="4"/>
             <!-- Button -->
-            <rect x="40" y="220" width="80" height="25" rx="12" fill="var(--accent-orange)" opacity="0.3"/>
+            <rect x="40" y="220" width="80" height="25" rx="12" fill="var(--sketch-stroke)" opacity="0.3"/>
             <!-- Decorative lines -->
             <line x1="40" y1="95" x2="130" y2="95" stroke-width="1.5" opacity="0.5"/>
             <line x1="40" y1="125" x2="150" y2="125" stroke-width="1.5" opacity="0.5"/>
@@ -538,17 +733,28 @@
     <!-- Main Content -->
     <div class="relative z-10">
         <!-- Navigation (Simple anchor menu) -->
-        <nav class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-sm" style="background-color: rgba(10, 10, 15, 0.9);">
+        <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b" style="background-color: oklch(from var(--background) l c h / 85%); border-color: var(--glass-border);">
             <div class="container mx-auto px-6 py-4">
                 <div class="flex justify-between items-center">
                     <a href="#hero" class="flex items-center space-x-3">
                         <img src="images/horizontal_h32.svg" alt="Red Phoenix Logo" class="h-8 object-contain">
                     </a>
                     <div class="hidden md:flex space-x-8">
-                        <a href="#services" class="text-sm hover:text-white transition-colors">Services</a>
-                        <a href="#team" class="text-sm hover:text-white transition-colors">Team</a>
-                        <a href="#contact" class="text-sm hover:text-white transition-colors">Contact</a>
+                        <a href="#services" class="text-sm nav-link">Services</a>
+                        <a href="#team" class="text-sm nav-link">Team</a>
+                        <a href="#contact" class="text-sm nav-link">Contact</a>
                     </div>
+                    <button id="themeToggle" aria-label="Toggle theme" class="p-2 rounded-lg transition-colors hover:bg-white/10 dark:hover:bg-white/10">
+                        <!-- Sun icon (shown in dark mode) -->
+                        <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <!-- Moon icon (shown in light mode) -->
+                        <svg id="moonIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -611,7 +817,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Service Card 1 -->
-                    <div class="service-card p-8 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="8" y="8" width="48" height="48" rx="4" stroke="url(#iconGradient1)" stroke-width="3" fill="none"/>
                             <path d="M 20 28 L 28 36 L 44 20" stroke="url(#iconGradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -630,7 +836,7 @@
                     </div>
 
                     <!-- Service Card 2 -->
-                    <div class="service-card p-8 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 16 12 L 8 32 L 16 52" stroke="url(#iconGradient2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M 48 12 L 56 32 L 48 52" stroke="url(#iconGradient2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -649,7 +855,7 @@
                     </div>
 
                     <!-- Service Card 3 -->
-                    <div class="service-card p-8 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="12" y="12" width="40" height="40" rx="2" stroke="url(#iconGradient3)" stroke-width="3" fill="none"/>
                             <circle cx="32" cy="32" r="8" stroke="url(#iconGradient3)" stroke-width="2.5" fill="none"/>
@@ -671,7 +877,7 @@
                     </div>
 
                     <!-- Service Card 4 -->
-                    <div class="service-card p-8 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="18" y="8" width="28" height="48" rx="4" stroke="url(#iconGradient4)" stroke-width="3" fill="none"/>
                             <line x1="22" y1="48" x2="42" y2="48" stroke="url(#iconGradient4)" stroke-width="2"/>
@@ -706,13 +912,13 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Team Member 1 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff4d00, #ff1744);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/artem-myhda.jpg" alt="Artem Myhda" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Artem Myhda</h3>
                         <p class="text-gray-400 mb-4">CTO</p>
-                        <a href="https://www.linkedin.com/in/artem-myhda/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--accent-orange);">
+                        <a href="https://www.linkedin.com/in/artem-myhda/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -721,8 +927,8 @@
                     </div>
 
                     <!-- Team Member 2 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff1744, #ff4d00);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/andriy-studynskyi.jpg" alt="Andriy Studynskyi" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Andriy Studynskyi</h3>
@@ -731,13 +937,13 @@
                     </div>
 
                     <!-- Team Member 3 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff4d00, #ff1744);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/yevhen-bondar.jpg" alt="Yevhen Bondar" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Yevhen Bondar</h3>
                         <p class="text-gray-400 mb-4">Software Engineer</p>
-                        <a href="https://www.linkedin.com/in/yevhen-bondar/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--accent-orange);">
+                        <a href="https://www.linkedin.com/in/yevhen-bondar/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -746,8 +952,8 @@
                     </div>
 
                     <!-- Team Member 4 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff1744, #ff4d00);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/volodymyr-ryzhkov.png" alt="Volodymyr Ryzhkov" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Volodymyr Ryzhkov</h3>
@@ -756,13 +962,13 @@
                     </div>
 
                     <!-- Team Member 5 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff4d00, #ff1744);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/hryhorii-yavir.jpg" alt="Hryhorii Yavir" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Hryhorii Yavir</h3>
                         <p class="text-gray-400 mb-4">Software Engineer</p>
-                        <a href="https://www.linkedin.com/in/hryhorii-yavir-46329439b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--accent-orange);">
+                        <a href="https://www.linkedin.com/in/hryhorii-yavir-46329439b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.39 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -771,13 +977,13 @@
                     </div>
 
                     <!-- Team Member 6 -->
-                    <div class="team-card p-6 rounded-lg text-center" style="background-color: var(--bg-secondary);">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: linear-gradient(135deg, #ff1744, #ff4d00);">
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/yuliya-yashchenko.jpg" alt="Yuliya Yashchenko" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold mb-1 font-display text-white">Yuliya Yashchenko</h3>
                         <p class="text-gray-400 mb-4">UI/UX Designer</p>
-                        <a href="https://www.linkedin.com/in/yuliya-yashchenko-6a744021b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--accent-orange);">
+                        <a href="https://www.linkedin.com/in/yuliya-yashchenko-6a744021b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -849,17 +1055,17 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-12 px-6 mt-20" style="background-color: var(--bg-secondary);">
+        <footer class="py-12 px-6 mt-20" style="background-color: var(--card);">
             <div class="container mx-auto max-w-6xl">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <a href="mailto:hello@red-phoenix.team" class="hover:text-white transition-colors" style="color: var(--accent-orange);">
+                    <a href="mailto:hello@red-phoenix.team" class="hover:text-white transition-colors" style="color: var(--primary);">
                         hello@red-phoenix.team
                     </a>
 
-                    <p class="text-gray-400">© 2025 Red Phoenix Team</p>
+                    <p style="color: var(--muted-foreground);">© 2026 Red Phoenix Team</p>
 
                     <a href="https://www.linkedin.com/company/red-phoenix-team/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
-                        <svg class="w-6 h-6" fill="currentColor" style="color: var(--accent-orange);" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" fill="currentColor" style="color: var(--primary);" viewBox="0 0 24 24">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                         </svg>
                     </a>
@@ -872,28 +1078,60 @@
     <div id="toastContainer"></div>
 
     <script>
-        // Initialize animated grid background
-        function initGrid() {
-            const grid = document.getElementById('gridBackground');
-            const numVertical = 8;
-            const numHorizontal = 8;
+        // Dot Grid Background
+        function initDotGrid() {
+            const GRID_COUNT = 7;
+            const baseGrid = document.getElementById('baseGrid');
+            const cursorGlow = document.getElementById('cursorGlow');
 
-            // Create vertical lines
-            for (let i = 0; i < numVertical; i++) {
-                const line = document.createElement('div');
-                line.className = 'grid-line grid-line-vertical';
-                line.style.left = `${(i + 1) * (100 / (numVertical + 1))}%`;
-                line.style.animationDelay = `${i * 0.2}s`;
-                grid.appendChild(line);
+            // Create grid lines for a container
+            function createGridLines(container) {
+                // Vertical lines
+                for (let i = 0; i < GRID_COUNT; i++) {
+                    const line = document.createElement('div');
+                    line.className = 'grid-line-v';
+                    line.style.left = ((i + 1) / (GRID_COUNT + 1) * 100) + '%';
+                    line.style.animation = 'grid-pulse-v 4s ease-in-out ' + (i * 0.25) + 's infinite';
+                    container.appendChild(line);
+                }
+                // Horizontal lines
+                for (let i = 0; i < GRID_COUNT; i++) {
+                    const line = document.createElement('div');
+                    line.className = 'grid-line-h';
+                    line.style.top = ((i + 1) / (GRID_COUNT + 1) * 100) + '%';
+                    line.style.animation = 'grid-pulse-h 4s ease-in-out ' + (i * 0.25) + 's infinite';
+                    container.appendChild(line);
+                }
             }
 
-            // Create horizontal lines
-            for (let i = 0; i < numHorizontal; i++) {
-                const line = document.createElement('div');
-                line.className = 'grid-line grid-line-horizontal';
-                line.style.top = `${(i + 1) * (100 / (numHorizontal + 1))}%`;
-                line.style.animationDelay = `${i * 0.2}s`;
-                grid.appendChild(line);
+            createGridLines(baseGrid);
+
+            // Cursor glow — only on pointer devices
+            if (window.matchMedia('(pointer: fine)').matches) {
+                // Create bright grid for cursor glow
+                const brightGrid = document.createElement('div');
+                brightGrid.style.position = 'absolute';
+                brightGrid.style.inset = '0';
+                brightGrid.style.opacity = 'var(--bg-cursor-opacity)';
+                createGridLines(brightGrid);
+                cursorGlow.appendChild(brightGrid);
+
+                let rafId = 0;
+
+                document.addEventListener('mousemove', function(e) {
+                    cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(function() {
+                        const mask = 'radial-gradient(280px circle at ' + e.clientX + 'px ' + e.clientY + 'px, black 0%, transparent 70%)';
+                        cursorGlow.style.maskImage = mask;
+                        cursorGlow.style.webkitMaskImage = mask;
+                        cursorGlow.style.opacity = '1';
+                    });
+                }, { passive: true });
+
+                document.addEventListener('mouseleave', function() {
+                    cancelAnimationFrame(rafId);
+                    cursorGlow.style.opacity = '0';
+                });
             }
         }
 
@@ -1005,9 +1243,9 @@
             });
 
             navLinks.forEach(link => {
-                link.classList.remove('text-white');
+                link.style.color = '';
                 if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('text-white');
+                    link.style.color = 'var(--foreground)';
                 }
             });
         });
@@ -1081,11 +1319,44 @@
         // Reposition sketches on window resize
         window.addEventListener('resize', throttle(positionSketches, 200));
 
+        // Theme toggle
+        function initThemeToggle() {
+            var toggle = document.getElementById('themeToggle');
+            var sunIcon = document.getElementById('sunIcon');
+            var moonIcon = document.getElementById('moonIcon');
+
+            function updateIcons() {
+                var isDark = document.documentElement.classList.contains('dark');
+                // Show sun in dark mode (to switch to light), moon in light mode (to switch to dark)
+                sunIcon.classList.toggle('hidden', !isDark);
+                moonIcon.classList.toggle('hidden', isDark);
+            }
+
+            // Set initial icons
+            updateIcons();
+
+            toggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                var isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateIcons();
+            });
+
+            // Listen for OS preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    document.documentElement.classList.toggle('dark', e.matches);
+                    updateIcons();
+                }
+            });
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
-            initGrid();
+            initDotGrid();
             positionSketches(); // Position sketches based on sections
             updateParallax(); // Initial parallax position
+            initThemeToggle();
         });
     </script>
 </body>
