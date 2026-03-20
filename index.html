@@ -223,6 +223,12 @@
             transition: transform 0.1s ease-out;
         }
 
+        /* Theme-aware text colors */
+        .text-heading { color: var(--foreground); }
+        .text-body { color: var(--muted-foreground); }
+        .link-primary { color: var(--primary); }
+        .link-primary:hover { color: var(--foreground); }
+
         /* Gradient text effect */
         .gradient-text {
             background: var(--text-gradient-primary);
@@ -372,117 +378,6 @@
         }
 
         /* Phoenix icon animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-        }
-
-        .phoenix-icon {
-            animation: float 3s ease-in-out infinite;
-            position: relative;
-        }
-
-        /* Phoenix glow animation */
-        @keyframes phoenixGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 6px oklch(from var(--glow-color) l c h / 35%))
-                        drop-shadow(0 0 14px oklch(from var(--glow-color) l c h / 15%));
-            }
-            50% {
-                filter: drop-shadow(0 0 12px oklch(from var(--glow-color) l c h / 55%))
-                        drop-shadow(0 0 28px oklch(from var(--glow-color) l c h / 30%));
-            }
-        }
-
-        .phoenix-icon svg {
-            animation: phoenixGlow 2s ease-in-out infinite;
-        }
-
-        /* Flame flicker animation */
-        @keyframes flameFlicker {
-            0%, 100% {
-                opacity: 0.7;
-                transform: translateY(0) scaleY(1);
-            }
-            25% {
-                opacity: 0.9;
-                transform: translateY(-2px) scaleY(1.05);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translateY(0) scaleY(0.98);
-            }
-            75% {
-                opacity: 0.95;
-                transform: translateY(-1px) scaleY(1.02);
-            }
-        }
-
-        /* Fire particles */
-        @keyframes fireParticle {
-            0% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.9;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-22px) translateX(var(--drift)) scale(0);
-                opacity: 0;
-            }
-        }
-
-        .fire-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #ff4d00, #ff1744);
-            pointer-events: none;
-            animation: fireParticle 2.1s ease-out infinite;
-        }
-
-        .fire-particle:nth-child(1) {
-            left: 45%;
-            bottom: 30%;
-            animation-delay: 0s;
-            --drift: -10px;
-        }
-        .fire-particle:nth-child(2) {
-            left: 55%;
-            bottom: 30%;
-            animation-delay: 0.3s;
-            --drift: 10px;
-        }
-        .fire-particle:nth-child(3) {
-            left: 50%;
-            bottom: 25%;
-            animation-delay: 0.6s;
-            --drift: -5px;
-        }
-        .fire-particle:nth-child(4) {
-            left: 48%;
-            bottom: 28%;
-            animation-delay: 0.9s;
-            --drift: 8px;
-        }
-        .fire-particle:nth-child(5) {
-            left: 52%;
-            bottom: 32%;
-            animation-delay: 1.2s;
-            --drift: -8px;
-        }
-        .fire-particle:nth-child(6) {
-            left: 47%;
-            bottom: 26%;
-            animation-delay: 1.5s;
-            --drift: 12px;
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .toast {
@@ -763,29 +658,72 @@
         <section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-20">
             <div class="container mx-auto max-w-5xl text-center">
                 <!-- Phoenix Icon -->
-                <div class="mb-8 phoenix-icon">
-                    <!-- Fire particles -->
-                    <div class="fire-particle"></div>
-                    <div class="fire-particle"></div>
-                    <div class="fire-particle"></div>
-                    <div class="fire-particle"></div>
-                    <div class="fire-particle"></div>
-                    <div class="fire-particle"></div>
-
-                    <svg class="w-28 h-28 mx-auto" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M31.999 58.667L26.666 50.667L30.666 45.333H30.667L8 24.0068L8.02637 13.333L31.9785 34.707L56 13.3955L55.9736 24.0684L33.333 45.333L37.333 50.667L31.999 58.667ZM45.333 16.8857L31.999 28.333L18.666 16.8857V7L31.999 17.667L45.333 7V16.8857Z" fill="url(#paint0_linear_logo)"/>
+                <!-- ▼ Red Phoenix Animated Logo — self-contained, copy this entire block ▼ -->
+                <div class="rp-logo mb-8">
+                    <style>
+                        .rp-logo { animation: rp-float 3s ease-in-out infinite; position: relative; }
+                        .rp-logo svg { position: relative; z-index: 2; }
+                        .rp-logo .rp-embers { position: absolute; top: 50%; left: 50%; width: 200px; height: 200px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+                        .rp-logo .rp-ember { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+                        @keyframes rp-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+                    </style>
+                    <div class="rp-embers"></div>
+                    <svg width="160" height="160" viewBox="-10 -5 84 74" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto">
                         <defs>
-                            <linearGradient id="paint0_linear_logo" x1="10.6667" y1="3.99997" x2="60.0004" y2="68.0001" gradientUnits="userSpaceOnUse">
-                                <stop offset="0.103063" stop-color="#FF8C34"/>
-                                <stop offset="0.352064" stop-color="#EB4F2E"/>
-                                <stop offset="0.535638" stop-color="#EB393C"/>
-                                <stop offset="0.700851" stop-color="#C71625"/>
+                            <linearGradient id="rpGrad" x1="10.667" y1="4" x2="60" y2="68" gradientUnits="userSpaceOnUse">
+                                <stop offset=".1" stop-color="#FF8C34"/><stop offset=".35" stop-color="#EB4F2E"/>
+                                <stop offset=".54" stop-color="#EB393C"/><stop offset=".7" stop-color="#C71625"/>
                             </linearGradient>
+                            <filter id="rpGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b1"/>
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b2"/>
+                                <feBlend in="b1" in2="b2" mode="screen" result="g"/>
+                                <feComponentTransfer in="g"><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+                            </filter>
+                            <filter id="rpEdge1" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/></filter>
+                            <filter id="rpEdge2" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="5"/></filter>
+                            <path id="rpPath" d="M31.999 58.667L26.666 50.667L30.666 45.333H30.667L8 24.0068L8.02637 13.333L31.9785 34.707L56 13.3955L55.9736 24.0684L33.333 45.333L37.333 50.667L31.999 58.667ZM45.333 16.8857L31.999 28.333L18.666 16.8857V7L31.999 17.667L45.333 7V16.8857Z"/>
                         </defs>
+                        <g filter="url(#rpEdge2)" opacity=".25"><use href="#rpPath" fill="none" stroke="#FF6D00" stroke-width="2" stroke-linejoin="round"/></g>
+                        <g filter="url(#rpEdge1)" opacity=".4"><use href="#rpPath" fill="none" stroke="#FF8C34" stroke-width="1" stroke-linejoin="round"/></g>
+                        <g filter="url(#rpGlow)"><use href="#rpPath" fill="url(#rpGrad)"><animate attributeName="opacity" values=".35;.55;.35" dur="3s" repeatCount="indefinite"/></use></g>
+                        <use href="#rpPath" fill="url(#rpGrad)"/>
                     </svg>
+                    <script>
+                    (function(){
+                        if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+                        var c=document.querySelector('.rp-embers'),N=4,P=[],
+                        C=['#ff4d00','#ff6d00','#ff3d00','#ff1744','#e53515','#cc2200'],
+                        Z=[{x:54,y:68},{x:66,y:56},{x:146,y:68},{x:134,y:56},{x:72,y:52},{x:128,y:52},{x:100,y:52},{x:95,y:54},{x:105,y:54}];
+                        function R(p,init){
+                            var z=Z[Math.random()*Z.length|0],sp=Math.random()<.8?.1+Math.random()*.25:.5+Math.random()*.8;
+                            p.x=z.x+(Math.random()-.5)*10;p.y=z.y+(Math.random()-.5)*8;
+                            p.vx=(Math.random()-.5)*.15*sp;p.vy=-(0.4+Math.random()*.3)*sp;
+                            p.sz=2+Math.random()*3.5;p.t=0;p.ml=.6+Math.random()*1.2;
+                            p.c=C[Math.random()*C.length|0];p.d=(Math.random()-.5)*.3;
+                            p.ws=2+Math.random()*3;p.wa=.2+Math.random()*.3;
+                            if(init)p.t=Math.random()*p.ml;return p;
+                        }
+                        for(var i=0;i<N;i++){var e=document.createElement('div');e.className='rp-ember';c.appendChild(e);P.push(R({el:e},true));}
+                        var lt=0;
+                        function A(now){
+                            var dt=Math.min((now-lt)/1e3,.05);lt=now;
+                            for(var i=0;i<P.length;i++){
+                                var p=P[i];p.t+=dt;if(p.t>=p.ml){R(p,false);continue;}
+                                var pr=p.t/p.ml,fi=Math.min(pr/.15,1),fo=1-Math.max((pr-.6)/.4,0),o=fi*fo*.55,sc=fi*(1-pr*.85);
+                                p.x+=(p.vx+p.d+Math.sin(p.t*p.ws)*p.wa)*dt*30;p.y+=p.vy*dt*30;
+                                var s=p.sz*sc,g=Math.max(s*2,4);
+                                p.el.style.cssText='left:'+p.x+'px;top:'+p.y+'px;width:'+s+'px;height:'+s+'px;opacity:'+o+';background:'+p.c+';box-shadow:0 0 '+g+'px '+p.c+',0 0 '+g*2.5+'px '+p.c+',0 0 '+g*5+'px '+p.c+';transform:translate(-50%,-50%)';
+                            }
+                            requestAnimationFrame(A);
+                        }
+                        requestAnimationFrame(function(n){lt=n;A(n);});
+                    })();
+                    </script>
                 </div>
+                <!-- ▲ Red Phoenix Animated Logo — end ▲ -->
 
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 font-display text-white">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 font-display text-heading">
                     RED PHOENIX TEAM
                 </h1>
 
@@ -793,7 +731,7 @@
                     We engineer digital experiences that rise above.
                 </p>
 
-                <p class="text-lg md:text-xl mb-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-lg md:text-xl mb-12 text-body max-w-2xl mx-auto leading-relaxed">
                     From concept to deployment, we craft software solutions that transform ideas into exceptional digital products. Code with precision. Create with passion. Conquer with innovation.
                 </p>
 
@@ -808,10 +746,10 @@
         <!-- Services Section -->
         <section id="services" class="py-20 px-6">
             <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-heading">
                     What We Build
                 </h2>
-                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                <p class="text-center text-body mb-16 max-w-2xl mx-auto">
                     Comprehensive digital solutions tailored to your vision
                 </p>
 
@@ -819,19 +757,22 @@
                     <!-- Service Card 1 -->
                     <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="8" y="8" width="48" height="48" rx="4" stroke="url(#iconGradient1)" stroke-width="3" fill="none"/>
-                            <path d="M 20 28 L 28 36 L 44 20" stroke="url(#iconGradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="40" cy="44" r="3" fill="url(#iconGradient1)"/>
+                            <rect x="12" y="12" width="40" height="40" rx="2" stroke="url(#iconGradient3)" stroke-width="3" fill="none"/>
+                            <circle cx="32" cy="32" r="8" stroke="url(#iconGradient3)" stroke-width="2.5" fill="none"/>
+                            <line x1="32" y1="12" x2="32" y2="24" stroke="url(#iconGradient3)" stroke-width="2.5"/>
+                            <line x1="32" y1="40" x2="32" y2="52" stroke="url(#iconGradient3)" stroke-width="2.5"/>
+                            <line x1="12" y1="32" x2="24" y2="32" stroke="url(#iconGradient3)" stroke-width="2.5"/>
+                            <line x1="40" y1="32" x2="52" y2="32" stroke="url(#iconGradient3)" stroke-width="2.5"/>
                             <defs>
-                                <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#ff4d00"/>
                                     <stop offset="100%" style="stop-color:#ff1744"/>
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-4 font-display text-white">UI/UX Design</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            We craft intuitive interfaces that users love. From wireframes to pixel-perfect designs, we make complex simple. Every interaction is thoughtfully designed to create delightful experiences that keep users engaged.
+                        <h3 class="text-2xl font-bold mb-4 font-display text-heading">Custom Software Development</h3>
+                        <p class="text-body leading-relaxed">
+                            Tailored solutions for unique challenges. We architect and build software that scales with your business. From enterprise platforms to innovative startups, we turn complex requirements into elegant code.
                         </p>
                     </div>
 
@@ -848,35 +789,13 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-4 font-display text-white">Web Development</h3>
-                        <p class="text-gray-400 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-4 font-display text-heading">Web Development</h3>
+                        <p class="text-body leading-relaxed">
                             Modern, performant websites built with passion. Responsive, accessible, and blazing fast. We leverage the fresh technologies and best practices to deliver web experiences that exceed expectations.
                         </p>
                     </div>
 
                     <!-- Service Card 3 -->
-                    <div class="service-card glass-panel p-8 rounded-lg">
-                        <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="12" y="12" width="40" height="40" rx="2" stroke="url(#iconGradient3)" stroke-width="3" fill="none"/>
-                            <circle cx="32" cy="32" r="8" stroke="url(#iconGradient3)" stroke-width="2.5" fill="none"/>
-                            <line x1="32" y1="12" x2="32" y2="24" stroke="url(#iconGradient3)" stroke-width="2.5"/>
-                            <line x1="32" y1="40" x2="32" y2="52" stroke="url(#iconGradient3)" stroke-width="2.5"/>
-                            <line x1="12" y1="32" x2="24" y2="32" stroke="url(#iconGradient3)" stroke-width="2.5"/>
-                            <line x1="40" y1="32" x2="52" y2="32" stroke="url(#iconGradient3)" stroke-width="2.5"/>
-                            <defs>
-                                <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#ff4d00"/>
-                                    <stop offset="100%" style="stop-color:#ff1744"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <h3 class="text-2xl font-bold mb-4 font-display text-white">Custom Software Development</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Tailored solutions for unique challenges. We architect and build software that scales with your business. From enterprise platforms to innovative startups, we turn complex requirements into elegant code.
-                        </p>
-                    </div>
-
-                    <!-- Service Card 4 -->
                     <div class="service-card glass-panel p-8 rounded-lg">
                         <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="18" y="8" width="28" height="48" rx="4" stroke="url(#iconGradient4)" stroke-width="3" fill="none"/>
@@ -889,9 +808,28 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-4 font-display text-white">Mobile Development</h3>
-                        <p class="text-gray-400 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-4 font-display text-heading">Mobile Development</h3>
+                        <p class="text-body leading-relaxed">
                             Native and cross-platform apps that deliver seamless experiences on iOS and Android. We build mobile solutions that users carry with them everywhere, combining beautiful design with powerful functionality.
+                        </p>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="service-card glass-panel p-8 rounded-lg">
+                        <svg class="w-14 h-14 mb-4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="8" width="48" height="48" rx="4" stroke="url(#iconGradient1)" stroke-width="3" fill="none"/>
+                            <path d="M 20 28 L 28 36 L 44 20" stroke="url(#iconGradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="40" cy="44" r="3" fill="url(#iconGradient1)"/>
+                            <defs>
+                                <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ff4d00"/>
+                                    <stop offset="100%" style="stop-color:#ff1744"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <h3 class="text-2xl font-bold mb-4 font-display text-heading">UI/UX Design</h3>
+                        <p class="text-body leading-relaxed">
+                            We craft intuitive interfaces that users love. From wireframes to pixel-perfect designs, we make complex simple. Every interaction is thoughtfully designed to create delightful experiences that keep users engaged.
                         </p>
                     </div>
                 </div>
@@ -903,10 +841,10 @@
         <!-- Team Section -->
         <section id="team" class="py-20 px-6">
             <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-heading">
                     The Minds Behind the Code
                 </h2>
-                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                <p class="text-center text-body mb-16 max-w-2xl mx-auto">
                     A passionate team of creators, engineers, and innovators
                 </p>
 
@@ -916,9 +854,9 @@
                         <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/artem-myhda.jpg" alt="Artem Myhda" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Artem Myhda</h3>
-                        <p class="text-gray-400 mb-4">CTO</p>
-                        <a href="https://www.linkedin.com/in/artem-myhda/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Artem Myhda</h3>
+                        <p class="text-body mb-4">CTO</p>
+                        <a href="https://www.linkedin.com/in/artem-myhda/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-primary transition-colors">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -927,23 +865,13 @@
                     </div>
 
                     <!-- Team Member 2 -->
-                    <div class="team-card glass-panel p-6 rounded-lg text-center">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
-                            <img src="images/people/andriy-studynskyi.jpg" alt="Andriy Studynskyi" class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Andriy Studynskyi</h3>
-                        <p class="text-gray-400 mb-4">Sales Manager</p>
-
-                    </div>
-
-                    <!-- Team Member 3 -->
-                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                     <div class="team-card glass-panel p-6 rounded-lg text-center">
                         <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/yevhen-bondar.jpg" alt="Yevhen Bondar" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Yevhen Bondar</h3>
-                        <p class="text-gray-400 mb-4">Software Engineer</p>
-                        <a href="https://www.linkedin.com/in/yevhen-bondar/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Yevhen Bondar</h3>
+                        <p class="text-body mb-4">Founder & Solution Architect</p>
+                        <a href="https://www.linkedin.com/in/yevhen-bondar/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-primary transition-colors">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -951,13 +879,23 @@
                         </a>
                     </div>
 
+                    <!-- Team Member 3 -->
+                    <div class="team-card glass-panel p-6 rounded-lg text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
+                            <img src="images/people/andriy-studynskyi.jpg" alt="Andriy Studynskyi" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Andriy Studynskyi</h3>
+                        <p class="text-body mb-4">Sales Manager</p>
+
+                    </div>
+
                     <!-- Team Member 4 -->
                     <div class="team-card glass-panel p-6 rounded-lg text-center">
                         <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/volodymyr-ryzhkov.png" alt="Volodymyr Ryzhkov" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Volodymyr Ryzhkov</h3>
-                        <p class="text-gray-400 mb-4">Software Engineer</p>
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Volodymyr Ryzhkov</h3>
+                        <p class="text-body mb-4">Software Engineer</p>
 
                     </div>
 
@@ -966,9 +904,9 @@
                         <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/hryhorii-yavir.jpg" alt="Hryhorii Yavir" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Hryhorii Yavir</h3>
-                        <p class="text-gray-400 mb-4">Software Engineer</p>
-                        <a href="https://www.linkedin.com/in/hryhorii-yavir-46329439b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Hryhorii Yavir</h3>
+                        <p class="text-body mb-4">Software Engineer</p>
+                        <a href="https://www.linkedin.com/in/hryhorii-yavir-46329439b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-primary transition-colors">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.39 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -981,9 +919,9 @@
                         <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden" style="background: var(--text-gradient-primary);">
                             <img src="images/people/yuliya-yashchenko.jpg" alt="Yuliya Yashchenko" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-xl font-bold mb-1 font-display text-white">Yuliya Yashchenko</h3>
-                        <p class="text-gray-400 mb-4">UI/UX Designer</p>
-                        <a href="https://www.linkedin.com/in/yuliya-yashchenko-6a744021b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm hover:text-white transition-colors" style="color: var(--primary);">
+                        <h3 class="text-xl font-bold mb-1 font-display text-heading">Yuliya Yashchenko</h3>
+                        <p class="text-body mb-4">UI/UX Designer</p>
+                        <a href="https://www.linkedin.com/in/yuliya-yashchenko-6a744021b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-primary transition-colors">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
@@ -999,10 +937,10 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 px-6">
             <div class="container mx-auto max-w-2xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center font-display text-heading">
                     Let's Build Something Great
                 </h2>
-                <p class="text-center text-gray-400 mb-12">
+                <p class="text-center text-body mb-12">
                     Have a project in mind? Drop us a message and we'll get back to you within 24 hours.
                 </p>
 
@@ -1058,7 +996,7 @@
         <footer class="py-12 px-6 mt-20" style="background-color: var(--card);">
             <div class="container mx-auto max-w-6xl">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <a href="mailto:hello@red-phoenix.team" class="hover:text-white transition-colors" style="color: var(--primary);">
+                    <a href="mailto:hello@red-phoenix.team" class="link-primary transition-colors">
                         hello@red-phoenix.team
                     </a>
 
@@ -1351,11 +1289,10 @@
             });
         }
 
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             initDotGrid();
-            positionSketches(); // Position sketches based on sections
-            updateParallax(); // Initial parallax position
+            positionSketches();
+            updateParallax();
             initThemeToggle();
         });
     </script>
