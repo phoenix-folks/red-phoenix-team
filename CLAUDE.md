@@ -6,10 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a single-page landing site for Red Phoenix Team, a software development agency. The site is deployed via GitHub Pages to the custom domain `red-phoenix.team`.
 
-## Code Style
-
-Always write idiomatic code — use libraries, APIs, and language features the way they were intended to be used. Follow established patterns and best practices for each technology. Only deviate from idiomatic usage when `ai-docs/context/conventions.md` explicitly says otherwise.
-
 ## Architecture
 
 **Single-File Application**: The entire site is contained in `index.html` - a self-contained HTML file with embedded CSS and JavaScript. There is no build process.
