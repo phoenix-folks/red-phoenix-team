@@ -632,7 +632,39 @@
             <div class="container mx-auto px-6 py-4">
                 <div class="flex justify-between items-center">
                     <a href="#hero" class="flex items-center space-x-3">
-                        <img src="images/horizontal_h32.svg" alt="Red Phoenix Logo" class="h-8 object-contain">
+                        <div class="rp-logo rp-logo--nav" style="animation:none">
+                            <div class="rp-embers rp-embers-nav"></div>
+                            <svg width="32" height="32" viewBox="-10 -5 84 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="rpGradNav" x1="10.667" y1="4" x2="60" y2="68" gradientUnits="userSpaceOnUse">
+                                        <stop offset=".1" stop-color="#FF8C34"/><stop offset=".35" stop-color="#EB4F2E"/>
+                                        <stop offset=".54" stop-color="#EB393C"/><stop offset=".7" stop-color="#C71625"/>
+                                    </linearGradient>
+                                    <filter id="rpGlowNav" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b1"/>
+                                        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b2"/>
+                                        <feBlend in="b1" in2="b2" mode="screen" result="g"/>
+                                        <feComponentTransfer in="g"><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+                                    </filter>
+                                    <filter id="rpEdge1Nav" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/></filter>
+                                    <filter id="rpEdge2Nav" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="5"/></filter>
+                                    <path id="rpPathNav" d="M31.999 58.667L26.666 50.667L30.666 45.333H30.667L8 24.0068L8.02637 13.333L31.9785 34.707L56 13.3955L55.9736 24.0684L33.333 45.333L37.333 50.667L31.999 58.667ZM45.333 16.8857L31.999 28.333L18.666 16.8857V7L31.999 17.667L45.333 7V16.8857Z"/>
+                                </defs>
+                                <g filter="url(#rpEdge2Nav)" opacity=".25"><use href="#rpPathNav" fill="none" stroke="#FF6D00" stroke-width="2" stroke-linejoin="round"/></g>
+                                <g filter="url(#rpEdge1Nav)" opacity=".4"><use href="#rpPathNav" fill="none" stroke="#FF8C34" stroke-width="1" stroke-linejoin="round"/></g>
+                                <g filter="url(#rpGlowNav)"><use href="#rpPathNav" fill="url(#rpGradNav)"><animate attributeName="opacity" values=".35;.55;.35" dur="3s" repeatCount="indefinite"/></use></g>
+                                <use href="#rpPathNav" fill="url(#rpGradNav)"/>
+                            </svg>
+                            <script>
+                            (function(){
+                                var el = document.currentScript.parentElement;
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    rpInitEmbers(el.querySelector('.rp-embers-nav'), el.querySelector('svg'), 2);
+                                });
+                            })();
+                            </script>
+                        </div>
+                        <span class="font-display font-bold text-lg tracking-wide" style="color: var(--primary)">RED PHOENIX</span>
                     </a>
                     <div class="hidden md:flex space-x-8">
                         <a href="#services" class="text-sm nav-link">Services</a>
@@ -661,14 +693,73 @@
                 <!-- ▼ Red Phoenix Animated Logo — self-contained, copy this entire block ▼ -->
                 <div class="rp-logo mb-8">
                     <style>
-                        .rp-logo { animation: rp-float 3s ease-in-out infinite; position: relative; }
-                        .rp-logo svg { position: relative; z-index: 2; }
-                        .rp-logo .rp-embers { position: absolute; top: 50%; left: 50%; width: 200px; height: 200px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+                        .rp-logo { animation: rp-float 3s ease-in-out infinite; position: relative; display: inline-block; }
+                        .rp-logo svg { position: relative; z-index: 2; display: block; }
+                        .rp-logo .rp-embers { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
                         .rp-logo .rp-ember { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
                         @keyframes rp-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
                     </style>
+                    <script>
+                    // Shared ember system — spawn points in SVG viewBox coords, auto-mapped to any size
+                    function rpInitEmbers(container, svg, count) {
+                        if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+                        // ViewBox: -10, -5, 84, 74
+                        var vbX = -10, vbY = -5, vbW = 84, vbH = 74;
+                        var w = svg.clientWidth || svg.width.baseVal.value;
+                        var h = svg.clientHeight || svg.height.baseVal.value;
+                        var scaleX = w / vbW, scaleY = h / vbH;
+                        var scale = Math.min(scaleX, scaleY);
+                        var offX = (w - vbW * scale) / 2, offY = (h - vbH * scale) / 2;
+                        // Map viewBox coord to pixel coord in container
+                        function m(vx, vy) { return { x: (vx - vbX) * scale + offX, y: (vy - vbY) * scale + offY }; }
+                        // Spawn zones in viewBox coords (logo features)
+                        var zones = [
+                            m(8, 13.3), m(18.7, 10), m(56, 13.4), m(45.3, 10),
+                            m(18.7, 7), m(45.3, 7), m(32, 7), m(28, 9), m(36, 9)
+                        ];
+                        var jitter = 5 * scale, N = count || 4, P = [],
+                        C = ['#ff4d00','#ff6d00','#ff3d00','#ff1744','#e53515','#cc2200'];
+                        function R(p, init) {
+                            var z = zones[Math.random() * zones.length | 0];
+                            var sp = Math.random() < .8 ? .1 + Math.random() * .25 : .5 + Math.random() * .8;
+                            p.x = z.x + (Math.random() - .5) * jitter;
+                            p.y = z.y + (Math.random() - .5) * jitter * .8;
+                            p.vx = (Math.random() - .5) * .15 * sp;
+                            p.vy = -(0.4 + Math.random() * .3) * sp;
+                            p.sz = (1 + Math.random() * 2.5) * scale;
+                            p.t = 0; p.ml = .6 + Math.random() * 1.2;
+                            p.c = C[Math.random() * C.length | 0];
+                            p.d = (Math.random() - .5) * .3;
+                            p.ws = 2 + Math.random() * 3; p.wa = .2 + Math.random() * .3;
+                            if (init) p.t = Math.random() * p.ml;
+                            return p;
+                        }
+                        for (var i = 0; i < N; i++) {
+                            var e = document.createElement('div');
+                            e.className = 'rp-ember';
+                            container.appendChild(e);
+                            P.push(R({ el: e }, true));
+                        }
+                        var lt = 0;
+                        function A(now) {
+                            var dt = Math.min((now - lt) / 1e3, .05); lt = now;
+                            for (var i = 0; i < P.length; i++) {
+                                var p = P[i]; p.t += dt;
+                                if (p.t >= p.ml) { R(p, false); continue; }
+                                var pr = p.t / p.ml, fi = Math.min(pr / .15, 1), fo = 1 - Math.max((pr - .6) / .4, 0);
+                                var o = fi * fo * .55, sc = fi * (1 - pr * .85);
+                                p.x += (p.vx + p.d + Math.sin(p.t * p.ws) * p.wa) * dt * 30;
+                                p.y += p.vy * dt * 30;
+                                var s = p.sz * sc, g = Math.max(s * 2, 3);
+                                p.el.style.cssText = 'left:' + p.x + 'px;top:' + p.y + 'px;width:' + s + 'px;height:' + s + 'px;opacity:' + o + ';background:' + p.c + ';box-shadow:0 0 ' + g + 'px ' + p.c + ',0 0 ' + g * 2.5 + 'px ' + p.c + ',0 0 ' + g * 5 + 'px ' + p.c + ';transform:translate(-50%,-50%)';
+                            }
+                            requestAnimationFrame(A);
+                        }
+                        requestAnimationFrame(function(n) { lt = n; A(n); });
+                    }
+                    </script>
                     <div class="rp-embers"></div>
-                    <svg width="160" height="160" viewBox="-10 -5 84 74" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto">
+                    <svg width="160" height="160" viewBox="-10 -5 84 74" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="rpGrad" x1="10.667" y1="4" x2="60" y2="68" gradientUnits="userSpaceOnUse">
                                 <stop offset=".1" stop-color="#FF8C34"/><stop offset=".35" stop-color="#EB4F2E"/>
@@ -691,33 +782,8 @@
                     </svg>
                     <script>
                     (function(){
-                        if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-                        var c=document.querySelector('.rp-embers'),N=4,P=[],
-                        C=['#ff4d00','#ff6d00','#ff3d00','#ff1744','#e53515','#cc2200'],
-                        Z=[{x:54,y:68},{x:66,y:56},{x:146,y:68},{x:134,y:56},{x:72,y:52},{x:128,y:52},{x:100,y:52},{x:95,y:54},{x:105,y:54}];
-                        function R(p,init){
-                            var z=Z[Math.random()*Z.length|0],sp=Math.random()<.8?.1+Math.random()*.25:.5+Math.random()*.8;
-                            p.x=z.x+(Math.random()-.5)*10;p.y=z.y+(Math.random()-.5)*8;
-                            p.vx=(Math.random()-.5)*.15*sp;p.vy=-(0.4+Math.random()*.3)*sp;
-                            p.sz=2+Math.random()*3.5;p.t=0;p.ml=.6+Math.random()*1.2;
-                            p.c=C[Math.random()*C.length|0];p.d=(Math.random()-.5)*.3;
-                            p.ws=2+Math.random()*3;p.wa=.2+Math.random()*.3;
-                            if(init)p.t=Math.random()*p.ml;return p;
-                        }
-                        for(var i=0;i<N;i++){var e=document.createElement('div');e.className='rp-ember';c.appendChild(e);P.push(R({el:e},true));}
-                        var lt=0;
-                        function A(now){
-                            var dt=Math.min((now-lt)/1e3,.05);lt=now;
-                            for(var i=0;i<P.length;i++){
-                                var p=P[i];p.t+=dt;if(p.t>=p.ml){R(p,false);continue;}
-                                var pr=p.t/p.ml,fi=Math.min(pr/.15,1),fo=1-Math.max((pr-.6)/.4,0),o=fi*fo*.55,sc=fi*(1-pr*.85);
-                                p.x+=(p.vx+p.d+Math.sin(p.t*p.ws)*p.wa)*dt*30;p.y+=p.vy*dt*30;
-                                var s=p.sz*sc,g=Math.max(s*2,4);
-                                p.el.style.cssText='left:'+p.x+'px;top:'+p.y+'px;width:'+s+'px;height:'+s+'px;opacity:'+o+';background:'+p.c+';box-shadow:0 0 '+g+'px '+p.c+',0 0 '+g*2.5+'px '+p.c+',0 0 '+g*5+'px '+p.c+';transform:translate(-50%,-50%)';
-                            }
-                            requestAnimationFrame(A);
-                        }
-                        requestAnimationFrame(function(n){lt=n;A(n);});
+                        var el = document.currentScript.parentElement;
+                        rpInitEmbers(el.querySelector('.rp-embers'), el.querySelector('svg'), 4);
                     })();
                     </script>
                 </div>
